@@ -6,9 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -49,25 +52,38 @@ fun Portada(
         modifier = modifier
             .fillMaxSize()
             .border(
-                width = 6.dp,
+                width = 4.dp,
                 color = Color(18, 110, 34)
             )
     ) {
         Column(
             modifier = modifier
                 .padding(
-                    vertical = 20.dp
+                    vertical = 25.dp,
+                    horizontal = 6.dp
                 )
+
         ) {
             Titulo(
                 titleText = "Universidad del Valle de Guatemala",
                 weight = FontWeight.Bold,
-                phorizontal = 50
+                phorizontal = 45
             )
+
             Titulo(
                 titleText = "Programación de plataformas móviles, Sección 30",
                 weight = FontWeight.Normal,
-                phorizontal = 10
+                phorizontal = 1
+            )
+
+            Info(
+                subtitle = "integrantes",
+                content = "Javier Chávez \nAxel Cruz \nEnya Gálvez"
+            )
+
+            Info(
+                subtitle = "catedrático",
+                content = "Juan Carlos Durini"
             )
         }
     }
@@ -82,11 +98,40 @@ fun Titulo(
 ) {
     Text(
         text = titleText,
-        modifier = modifier.padding(horizontal = phorizontal.dp, vertical = 4.dp),
-        style = MaterialTheme.typography.headlineMedium,
+        modifier = modifier
+            .padding(horizontal = phorizontal.dp, vertical = 4.dp)
+            .fillMaxWidth(),
+        style = MaterialTheme.typography.headlineSmall,
         textAlign = TextAlign.Center,
         fontWeight = weight
     )
+}
+
+@Composable
+fun Info(
+    modifier: Modifier = Modifier,
+    subtitle: String,
+    content: String,
+) {
+    Row(
+        modifier = modifier
+            .padding(horizontal = 50.dp, vertical = 10.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(
+            text = subtitle.uppercase(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = content,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
 }
 
 // Preview
