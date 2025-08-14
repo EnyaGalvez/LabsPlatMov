@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,47 +62,58 @@ fun Portada(
                 .padding(
                     vertical = 25.dp,
                     horizontal = 6.dp
-                )
+                ),
+            verticalArrangement = Arrangement.Center
 
         ) {
-            Titulo(
+            CenteredText(
                 titleText = "Universidad del Valle de Guatemala",
+                textStyle = MaterialTheme.typography.headlineMedium,
                 weight = FontWeight.Bold,
                 phorizontal = 45
             )
 
-            Titulo(
+            CenteredText(
                 titleText = "Programación de plataformas móviles, Sección 30",
+                textStyle = MaterialTheme.typography.headlineSmall,
                 weight = FontWeight.Normal,
                 phorizontal = 1
             )
 
             Info(
                 subtitle = "integrantes",
-                content = "Javier Chávez \nAxel Cruz \nEnya Gálvez"
+                content = "Javier Chávez\nAxel Cruz\nEnya Gálvez"
             )
 
             Info(
                 subtitle = "catedrático",
                 content = "Juan Carlos Durini"
             )
+
+            CenteredText(
+                titleText = "Enya Gálvez\n24693",
+                textStyle = MaterialTheme.typography.bodyLarge,
+                weight = FontWeight.Normal,
+                phorizontal = 45
+            )
         }
     }
 }
 
 @Composable
-fun Titulo(
+fun CenteredText(
     titleText: String,
     modifier: Modifier = Modifier,
+    textStyle: TextStyle,
     weight: FontWeight,
     phorizontal: Int
 ) {
     Text(
         text = titleText,
         modifier = modifier
-            .padding(horizontal = phorizontal.dp, vertical = 4.dp)
+            .padding(horizontal = phorizontal.dp, vertical = 10.dp)
             .fillMaxWidth(),
-        style = MaterialTheme.typography.headlineSmall,
+        style = textStyle,
         textAlign = TextAlign.Center,
         fontWeight = weight
     )
