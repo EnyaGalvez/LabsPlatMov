@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -55,8 +54,8 @@ fun Portada(
         modifier = modifier
             .fillMaxSize()
             .border(
-                width = 4.dp,
-                color = Color(18, 110, 34)
+                width = 6.dp,
+                color = MaterialTheme.colorScheme.primary
             ),
         contentAlignment = Alignment.Center
     ) {
@@ -104,8 +103,8 @@ fun Portada(
             painter = painterResource(R.drawable.logouvg),
             contentDescription = "Logo UVG",
             modifier = modifier
-                .padding(horizontal = 100.dp)
-                .alpha(0.2f)
+                .padding(horizontal = 90.dp)
+                .alpha(0.25f)
         )
     }
 }
@@ -160,7 +159,10 @@ fun Info(
 @Preview(showBackground = true)
 @Composable
 fun PortadaPreview() {
-    Lab4jComposeTheme {
+    Lab4jComposeTheme(
+        dynamicColor = false,
+        darkTheme = false
+    ) {
         Portada(modifier = Modifier.fillMaxSize())
     }
 }
