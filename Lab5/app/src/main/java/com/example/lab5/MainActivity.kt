@@ -136,15 +136,12 @@ fun AppComida(
 }
 
 
+
 @Composable
 fun IconoCircular(
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .size(30.dp)
-            .background(MaterialTheme.colorScheme.secondary, CircleShape)
-    ) {
+
         Icon(
             painter = painterResource(id = R.drawable.outline_update_24),
             contentDescription = "Actualizar",
@@ -154,7 +151,7 @@ fun IconoCircular(
                 .padding(5.dp)
         )
 
-    }
+
 }
 
 
