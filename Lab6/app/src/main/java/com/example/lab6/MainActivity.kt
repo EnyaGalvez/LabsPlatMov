@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -99,13 +100,14 @@ fun Counter(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Enya Gálvez",
-            style = MaterialTheme.typography.headlineLarge
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(vertical = 15.dp)
         )
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(15.dp),
+                .padding(bottom = 10.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -122,7 +124,7 @@ fun Counter(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "-",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center
                 )
             }
@@ -144,19 +146,29 @@ fun Counter(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "+",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center
                 )
             }
         }
 
-        HorizontalDivider()
+        HorizontalDivider( modifier = Modifier.padding(vertical = 5.dp) )
 
         StatLine( "Total incrementos: ", stats.inc )
         StatLine( "Total decrementos: ", stats.dec )
         StatLine( "Valor máximo: ", stats.max )
         StatLine( "Valor mínimo: ", stats.min )
         StatLine( "Total cambios: ", stats.changes )
+
+        Text(
+            text = "Historial:",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 27.dp),
+            textAlign = TextAlign.Left
+        )
 
         HistoryGrid(entries = historyTrend)
 
@@ -224,11 +236,11 @@ fun HistoryGrid(
         columns = GridCells.Fixed(5),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 25.dp),
+            .padding(horizontal = 25.dp, vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(entries) { (n, ok) ->
+        items(entries.drop(1)) { (n, ok) ->
             History(n, ok)
         }
     }
