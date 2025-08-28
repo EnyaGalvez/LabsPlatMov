@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -46,6 +47,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lab6.ui.theme.Lab6Theme
+import kotlin.text.clear
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,82 +98,100 @@ fun Counter(modifier: Modifier = Modifier) {
     // Diseño general
     Column(
         modifier = modifier.fillMaxSize(),
-        horizontalAlignment =  Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
-            text = "Enya Gálvez",
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier.padding(vertical = 15.dp)
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment =  Alignment.CenterHorizontally
         ) {
-
-            Button(
-                onClick = {
-                    count--
-                    history.add(count)
-                },
-                modifier = Modifier
-                    .size(30.dp),
-                shape = CircleShape,
-                contentPadding = PaddingValues(0.dp)
-            ) {
-                Text(
-                    text = "-",
-                    style = MaterialTheme.typography.titleLarge,
-                    textAlign = TextAlign.Center
-                )
-            }
-
             Text(
-                text = "$count",
-                style = MaterialTheme.typography.displayLarge,
-                modifier = Modifier.padding(horizontal = 14.dp)
+                text = "Enya Gálvez",
+                style = MaterialTheme.typography.headlineLarge,
+                modifier = Modifier.padding(vertical = 15.dp)
             )
 
-            Button(
-                onClick = {
-                    count++
-                    history.add(count)
-                },
-                modifier = Modifier.size(30.dp),
-                shape = CircleShape,
-                contentPadding = PaddingValues(0.dp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
+
+                Button(
+                    onClick = {
+                        count--
+                        history.add(count)
+                    },
+                    modifier = Modifier
+                        .size(30.dp),
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "-",
+                        style = MaterialTheme.typography.titleLarge,
+                        textAlign = TextAlign.Center
+                    )
+                }
+
                 Text(
-                    text = "+",
-                    style = MaterialTheme.typography.titleLarge,
-                    textAlign = TextAlign.Center
+                    text = "$count",
+                    style = MaterialTheme.typography.displayLarge,
+                    modifier = Modifier.padding(horizontal = 14.dp)
                 )
+
+                Button(
+                    onClick = {
+                        count++
+                        history.add(count)
+                    },
+                    modifier = Modifier.size(30.dp),
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "+",
+                        style = MaterialTheme.typography.titleLarge,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
+
+            HorizontalDivider( modifier = Modifier.padding(vertical = 5.dp) )
+
+            StatLine( "Total incrementos: ", stats.inc )
+            StatLine( "Total decrementos: ", stats.dec )
+            StatLine( "Valor máximo: ", stats.max )
+            StatLine( "Valor mínimo: ", stats.min )
+            StatLine( "Total cambios: ", stats.changes )
+
+            Text(
+                text = "Historial:",
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 27.dp),
+                textAlign = TextAlign.Left
+            )
+
+            HistoryGrid(entries = historyTrend)
         }
-
-        HorizontalDivider( modifier = Modifier.padding(vertical = 5.dp) )
-
-        StatLine( "Total incrementos: ", stats.inc )
-        StatLine( "Total decrementos: ", stats.dec )
-        StatLine( "Valor máximo: ", stats.max )
-        StatLine( "Valor mínimo: ", stats.min )
-        StatLine( "Total cambios: ", stats.changes )
-
-        Text(
-            text = "Historial:",
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
+        Button(
+            onClick = {
+                count = 0
+                history.clear()
+                history.add(0)
+            },
             modifier = Modifier
                 .fillMaxWidth()
+                .height(36.dp)
                 .padding(horizontal = 27.dp),
-            textAlign = TextAlign.Left
-        )
-
-        HistoryGrid(entries = historyTrend)
-
+            shape = RoundedCornerShape(10.dp)
+        ) {
+            Text("Reiniciar")
+        }
     }
 }
 
