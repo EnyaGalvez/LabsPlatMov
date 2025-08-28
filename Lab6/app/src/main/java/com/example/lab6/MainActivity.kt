@@ -263,14 +263,14 @@ fun HistoryGrid(
     Column(
         modifier = Modifier
             .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(5.dp)
         
     ) {
         entries.drop(1).chunked(5).forEach { row ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp, start = 25.dp, end = 25.dp),
+                    .padding(vertical = 5.dp, horizontal = 25.dp),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 row.forEach { (n, ok) ->
