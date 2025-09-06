@@ -1,3 +1,4 @@
+// ../ui/NotificationSource.kt
 enum class NotificationType {
     GENERAL,
     NEW_MEETING
